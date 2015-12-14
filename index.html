@@ -5,22 +5,41 @@
         <title>Pagepro Year Summary</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-        <script src="https://www.youtube.com/iframe_api"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
         <script type="text/javascript" src="app/angular.audio.js"></script>
 
         <script type="text/javascript" src="app/app.js"></script>
+        <script>
+          if ('registerElement' in document
+            && 'createShadowRoot' in HTMLElement.prototype
+            && 'import' in document.createElement('link')
+            && 'content' in document.createElement('template')) {
+            // We're using a browser with native WC support!
+          } else {
+            document.write('<script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"><\/script>')
+          }
+        </script>
+        <link rel="import" href="x-gif.html">
         <style type="text/css">
             body {
                 margin: 0;
             }
             .before-frame {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
                 display: flex;
                 height: 100vh;
                 width: 100%;
                 background: #991111;
-                justify-content: center;
-                align-items: center;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                        justify-content: center;
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                        align-items: center;
             }
             .before-frame .play {
                 font-size: 50px;
@@ -51,19 +70,26 @@
               -webkit-animation-duration: 5s;
               animation-duration: 5s;
             }
+            .invisible {
+                position: absolute;
+                opacity: 0;
+            }
         </style>
     </head>
     <body id="page" ng-controller="AnimationCtrl">
 
         <span ng-show="player.ready">ready</span>
         <!-- <div id="player"></div> -->
-        <div class="before-frame" ng-if="sound.paused">
+        <div class="before-frame" ng-show="sound.paused">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
         </div>
-        <div class="show-frame" ng-if="!sound.paused">
-            <div ng-if="sound.currentTime < 4" class="anim-fade-in anim-mid">logo</div>
-            <div ng-if="sound.currentTime > 4 && sound.currentTime < 10.8" class="anim-fade-in anim-slow">description</div>
-            <img src="https://media.giphy.com/media/freTElrZl4zaU/giphy.gif" ng-if="sound.currentTime > 10.8">
+        <div class="show-frame" ng-show="!sound.paused">
+            <div ng-show="logo" class="anim-fade-in anim-mid">logo</div>
+            <div ng-show="description" class="anim-fade-in anim-slow">description</div>
+            <!-- <img src="assets/20-pagepro-2015.gif" ng-show="sound.currentTime > 10.8"> -->
+            <div ng-class="{'invisible': !gif}">
+                <x-gif src="assets/21-pagepro-2015.gif" bpm="3"></x-gif>
+            </div>
         </div>
     </body>
 </html>
