@@ -1,0 +1,69 @@
+<!doctype html>
+<html ng-app="yearSummaryApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Pagepro Year Summary</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <script src="https://www.youtube.com/iframe_api"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="app/angular.audio.js"></script>
+
+        <script type="text/javascript" src="app/app.js"></script>
+        <style type="text/css">
+            body {
+                margin: 0;
+            }
+            .before-frame {
+                display: flex;
+                height: 100vh;
+                width: 100%;
+                background: #991111;
+                justify-content: center;
+                align-items: center;
+            }
+            .before-frame .play {
+                font-size: 50px;
+                color: white;
+                cursor: pointer;
+            }
+            @-webkit-keyframes fadein {
+              from { -webkit-transform: scale(.5); opacity: 0; }
+                to {  -webkit-transform: scale(1); opacity: 1; }
+            }
+            @keyframes fadein {
+              from { transform: scale(.5); opacity: 0; }
+                to { transform: scale(1); opacity: 1; }
+            }
+            .anim-fade-in {
+              -webkit-animation-name: fadein;
+              -webkit-animation-timing-function: ease-in;
+              -webkit-animation-fill-mode: forwards;
+              animation-name: fadein;
+              animation-timing-function: ease-in;
+              animation-fill-mode: forwards;
+            }
+            .anim-mid {
+              -webkit-animation-duration: 3s;
+              animation-duration: 3s;
+            }
+            .anim-slow {
+              -webkit-animation-duration: 5s;
+              animation-duration: 5s;
+            }
+        </style>
+    </head>
+    <body id="page" ng-controller="AnimationCtrl">
+
+        <span ng-show="player.ready">ready</span>
+        <!-- <div id="player"></div> -->
+        <div class="before-frame" ng-if="sound.paused">
+            <a ng-click="play()" class="play">Turn on speakers and click!</a>
+        </div>
+        <div class="show-frame" ng-if="!sound.paused">
+            <div ng-if="sound.currentTime < 4" class="anim-fade-in anim-mid">logo</div>
+            <div ng-if="sound.currentTime > 4 && sound.currentTime < 10.8" class="anim-fade-in anim-slow">description</div>
+            <img src="https://media.giphy.com/media/freTElrZl4zaU/giphy.gif" ng-if="sound.currentTime > 10.8">
+        </div>
+    </body>
+</html>
