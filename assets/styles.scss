@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 400;
+    font-style: normal;
+
+    src: url('proximanova-regular-webfont.eot') format('embedded-opentype'),
+    url('proximanova-regular-webfont.woff') format('woff'),
+    url('proximanova-regular-webfont.ttf') format('truetype'),
+    url('proximanova-regular-webfont.svg') format('svg');
+}
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 300;
+    font-style: normal;
+
+    src: url('proximanova-light-webfont.eot') format('embedded-opentype'),
+    url('proximanova-light-webfont.woff') format('woff'),
+    url('proximanova-light-webfont.ttf') format('truetype'),
+    url('proximanova-light-webfont.svg') format('svg');
+}
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    font-style: normal;
+
+    src: url('proximanova-semibold-webfont.eot') format('embedded-opentype'),
+    url('proximanova-semibold-webfont.woff') format('woff'),
+    url('proximanova-semibold-webfont.ttf') format('truetype'),
+    url('proximanova-semibold-webfont.svg') format('svg');
+}
+body {
+    margin: 0;
+    font-family: 'ProximaNova', Arial;
+    background: url(bg_hero-02.jpg) no-repeat #535353;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    color: white;
+}
+[ng-click] {
+    cursor: pointer;
+}
+.before-frame,
+.show-frame {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+            align-items: center;
+    font-size: 70px;
+    text-align: center;
+}
+img {
+    display: block;
+    max-width: 100%;
+}
+.before-frame .play {
+    color: white;
+    cursor: pointer;
+}
+@-webkit-keyframes fadein {
+  from { -webkit-transform: scale(.5); opacity: 0; }
+    to {  -webkit-transform: scale(1); opacity: 1; }
+}
+@keyframes fadein {
+  from { transform: scale(.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.anim-fade-in {
+  -webkit-animation-name: fadein;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-fill-mode: forwards;
+  animation-name: fadein;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+}
+.anim-mid {
+  -webkit-animation-duration: 3s;
+  animation-duration: 3s;
+}
+.anim-slow {
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+}
+.invisible {
+    position: absolute !important;
+    opacity: 0;
+    top: -9999px;
+    left: -9999px;
+}
+
+@keyframes move {
+    @for $i from 1 through 68 {
+        #{floor($i/68 * 100%)} {
+            top: -640px * ($i - 1);
+        }
+    }
+}
+
+@-webkit-keyframes move {
+    @for $i from 1 through 68 {
+        #{floor($i/68 * 100%)} {
+            top: -640px * ($i - 1);
+        }
+    }
+}
+
+#gif-holder {
+    position: relative;
+    width: 640px;
+    height: 640px;
+    overflow: hidden;
+    [class*="slide-"] {
+        opacity: 1;
+    }
+    .gif-holder__slider {
+        position: relative;
+        animation: move 20s infinite;
+        animation-timing-function: step-start;
+        &.stopped {
+            animation-duration: 0s;
+            opacity: 0.5;
+        }
+    }
+}
+
+.pauseIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    fill: white;
+    z-index: 10;
+}

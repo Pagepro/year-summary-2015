@@ -29,14 +29,15 @@ gulp.task('serve', ['sass'], function() {
     });
 });
 gulp.task('watch', function() {
+    gulp.watch('assets/*.scss', ['sass']);
     gulp.watch(['*.html', 'app/**/*.js'], reload);
 });
 gulp.task('sass', function () {
-    gulp.src('./src/sass/**/*.scss')
+    gulp.src('./assets/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('./static/css'))
+        .pipe(gulp.dest('./assets'))
         .pipe(reload({
             stream: true
         }));

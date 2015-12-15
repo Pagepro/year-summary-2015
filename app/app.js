@@ -13,6 +13,7 @@ app.controller('AnimationCtrl', [
         $scope.description = false;
         $scope.gif = false;
         $scope.switcher = 0;
+        $scope.firstPlay = false;
 
         $scope.play = function() {
             $scope.sound.play();
@@ -24,15 +25,16 @@ app.controller('AnimationCtrl', [
             $timeout(function () {
                 $scope.description = false;
                 $scope.gif = true;
-            }, 10500);
-            $interval(function () {
-                switcherCouner++;
-                if (switcherCouner % 2 == 0) {
-                    $scope.switcher = 1;
-                } else {
-                    $scope.switcher = 2.5;
-                }
-            }, 600);
+                $scope.firstPlay = true;
+            }, 10800);
+        };
+
+        $scope.toggleMusic = function () {
+            if ($scope.sound.paused) {
+                $scope.play();
+            } else {
+                $scope.stop();
+            }
         };
 
         $scope.stop = function() {
