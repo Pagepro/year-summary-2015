@@ -14,6 +14,7 @@ app.controller('AnimationCtrl', [
         $scope.gif = false;
         $scope.switcher = 0;
         $scope.firstPlay = false;
+        $scope.imagesLoaded = 0;
 
         $scope.play = function() {
             $scope.sound.play();
@@ -29,6 +30,13 @@ app.controller('AnimationCtrl', [
             }, 10800);
         };
 
+        $scope.imageLoaded = function () {
+            $scope.imagesLoaded++;
+            if ($scope.imagesLoaded == 68) {
+                console.log('all images loaded');
+            }
+        }
+
         $scope.toggleMusic = function () {
             if ($scope.sound.paused) {
                 $scope.play();
@@ -41,3 +49,14 @@ app.controller('AnimationCtrl', [
             $scope.sound.pause();
         };
     }])
+
+app.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.$apply(attrs.imageonload);
+            });
+        }
+    };
+});
