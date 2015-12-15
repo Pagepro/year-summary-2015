@@ -15,6 +15,7 @@ app.controller('AnimationCtrl', [
         $scope.switcher = 0;
         $scope.firstPlay = false;
         $scope.imagesLoaded = 0;
+        $scope.imagesLoadingInProgress = true;
 
         $scope.play = function() {
             $scope.sound.play();
@@ -33,7 +34,7 @@ app.controller('AnimationCtrl', [
         $scope.imageLoaded = function () {
             $scope.imagesLoaded++;
             if ($scope.imagesLoaded == 68) {
-                console.log('all images loaded');
+                $scope.imagesLoadingInProgress = false;
             }
         }
 

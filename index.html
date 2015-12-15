@@ -26,7 +26,7 @@
     </head>
     <body id="page" ng-controller="AnimationCtrl">
 
-        <span ng-show="player.ready">ready</span>
+        <div ng-show="imagesLoadingInProgress" class="images-loader">Loading... {{imagesLoaded/68 * 100}}%</div>
         <div class="before-frame" ng-show="sound.paused && !firstPlay">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
         </div>
