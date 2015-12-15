@@ -23,13 +23,13 @@
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
         </div>
         <div class="show-frame" ng-class="{'invisible': sound.paused && !firstPlay}">
-            <div ng-show="!sound.paused && logo && !firstPlay" class="anim-fade-in anim-mid"><img src="assets/pagepro_logo_white.svg" alt="Pagepro"></div>
-            <div ng-show="!sound.paused && description && !firstPlay" class="anim-fade-in anim-slow">
+            <div ng-show="!sound.paused && sound.currentTime < 4 && !firstPlay" class="anim-fade-in anim-mid"><img src="assets/pagepro_logo_white.svg" alt="Pagepro"></div>
+            <div ng-show="!sound.paused && sound.currentTime > 4 && sound.currentTime < 10.7 && !firstPlay" class="anim-fade-in anim-slow">
                 Thanks for year 2015!
                 <br>
                 Let's experience it once again...
             </div>
-            <div ng-class="{'invisible': !gif}">
+            <div ng-class="{'invisible': sound.currentTime < 10.7}">
                 <div id="gif-holder" class="move" ng-click="toggleMusic()">
                     <svg
                        ng-show="sound.paused"
