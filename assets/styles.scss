@@ -83,6 +83,10 @@ img {
   animation-timing-function: ease-in;
   animation-fill-mode: forwards;
 }
+.anim-fast {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
 .anim-mid {
   -webkit-animation-duration: 3s;
   animation-duration: 3s;
@@ -144,11 +148,42 @@ img {
     z-index: 10;
 }
 
-.images-loader {
+.images-loader--bg {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: 20;
+    -webkit-filter: blur(16px);
+    -moz-filter: blur(16px);
+    -o-filter: blur(16px);
+    -ms-filter: blur(16px);
+    filter: blur(16px);
+    background: url(bg_hero-02.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+}
+.images-loader--bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 21;
+    .progressbar {
+        width: 100%;
+        height: 5px;
+        margin: 50px auto;
+        background: #000;
+        .bar {
+            width: 100%;
+            height: 1px;
+            margin: 2px 0;
+            background: #d4213d;
+            position: absolute;
+            box-shadow: 0px 0px 10px 1px rgba(212, 72, 94, 0.7);
+        }
+    }
 }
