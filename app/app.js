@@ -22,14 +22,6 @@ app.controller('AnimationCtrl', [
         $scope.play = function() {
             $scope.sound.play();
             $scope.logo = true;
-            // $timeout(function () {
-            //     $scope.logo = false;
-            //     $scope.description = true;
-            // }, 4000);
-            // $timeout(function () {
-            //     $scope.description = false;
-            //     $scope.gif = true;
-            // }, 10700);
             $interval(function () {
                 switcherCouner++;
                 if (switcherCouner % 2 === 0) {
@@ -39,12 +31,6 @@ app.controller('AnimationCtrl', [
                 }
             }, 600);
         };
-
-        $scope.$watch('sound.audio', function () {
-            if ($scope.sound.audio) {
-                console.log('audio');
-            }
-        });
 
         $scope.$watch('sound.currentTime', function () {
             if ($scope.sound.currentTime > 10700)
