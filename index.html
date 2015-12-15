@@ -6,22 +6,12 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
         <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+        <!-- <script type="text/javascript" src="app/angular.min.js"></script> -->
         <!-- <script type="text/javascript" src="assets/gifshot.js"></script> -->
         <!-- <script type="text/javascript" src="assets/main.js"></script> -->
         <script type="text/javascript" src="app/angular.audio.js"></script>
 
         <script type="text/javascript" src="app/app.js"></script>
-        <script>
-          if ('registerElement' in document
-            && 'createShadowRoot' in HTMLElement.prototype
-            && 'import' in document.createElement('link')
-            && 'content' in document.createElement('template')) {
-            // We're using a browser with native WC support!
-          } else {
-            document.write('<script src="https:\/\/cdnjs.cloudflare.com/ajax/libs/polymer/0.3.4/platform.js"><\/script>')
-          }
-        </script>
-        <link rel="import" href="x-gif.html">
         <link rel="stylesheet" type="text/css" href="assets/styles.css">
     </head>
     <body id="page" ng-controller="AnimationCtrl">
@@ -32,105 +22,110 @@
                 <div class="bar" style="width: {{imagesLoaded/68 * 100 | number:0}}%"></div>
             </div>
         </div>
-        <div class="before-frame" ng-show="sound.paused && !firstPlay">
+        <div class="before-frame" ng-show="sound.paused && !firstPlay && !imagesLoadingInProgress">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
         </div>
-        <div class="show-frame">
+        <div class="show-frame" ng-class="{'invisible': sound.paused && !firstPlay}">
             <div ng-show="!sound.paused && logo && !firstPlay" class="anim-fade-in anim-mid"><img src="assets/pagepro_logo_white.svg" alt="Pagepro"></div>
             <div ng-show="!sound.paused && description && !firstPlay" class="anim-fade-in anim-slow">
                 Thanks for year 2015!
                 <br>
                 Let's experience it once again...
             </div>
-            <div ng-class="{'invisible': !gif}" id="gif-holder" class="move" ng-click="toggleMusic()">
-                <svg
-                   ng-show="sound.paused"
-                   class="pauseIcon"
-                   xmlns:dc="http://purl.org/dc/elements/1.1/"
-                   xmlns:cc="http://creativecommons.org/ns#"
-                   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-                   xmlns:svg="http://www.w3.org/2000/svg"
-                   xmlns="http://www.w3.org/2000/svg"
-                   id="pause-icon"
-                   version="1.1"
-                   height="150"
-                   width="150"
-                   viewBox="0 0 1200 1200">
-                  <path
-                     id="path15778"
-                     d="M 600,0 C 268.62914,0 0,268.62914 0,600 c 0,331.37086 268.62914,600 600,600 331.37086,0 600,-268.62914 600,-600 C 1200,268.62914 931.37086,0 600,0 z m -269.16515,289.38 181.71397,0 0,621.24 -181.71397,0 0,-621.24 z m 356.61633,0 181.71399,0 0,621.24 -181.71399,0 0,-621.24 z" />
-                </svg>
-                <div class="gif-holder__slider" ng-class="{'stopped': sound.paused}">
-                    <img src="assets/frames/2015-02-17_1424200664.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-17_1424200754.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-17_1424200955.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-17_1424201040.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-17_1424201121.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-17_1424201287.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-19_1424345339.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-21_1424523172.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-27_1425041443.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-27_1425066659.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-02-28_1425113738.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-01_1425210464.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-01_1425210682.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-02_1425303388.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-04_1425505593.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-04_1425505631.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-04_1425505653.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-04_1425505704.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-13_1426258097.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-21_1426967832.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-21_1426968073.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-31_1427834290.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-31_1427834387.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-03-31_1427834444.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-03_1428063391.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-03_1428064343.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429987865.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429987912.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429987938.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429988119.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429988143.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-04-25_1429988253.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-05-06_1430939454.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-05-14_1431600004.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-03_1433354781.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-04_1433429819.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-10_1433962335.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-19_1434740006.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-26_1435320390.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-26_1435320432.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-06-26_1435320460.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-07-09_1436445266.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-07-19_1437301595.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-07-19_1437301631.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-07-19_1437301710.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-07-19_1437301736.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-08-01_1438448845.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-08-16_1439728965.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-08-16_1439728992.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-09-13_1442150560.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-09-13_1442150605.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-09-13_1442150669.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-09-23_1442992579.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-08_1444331849.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-08_1444332152.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-16_1444998399.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-21_1445414167.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-21_1445414381.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-21_1445414389.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-21_1445414394.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-10-21_1445414484.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-11-19_1447928946.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-11-23_1448291694.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-11-23_1448291773.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-12-04_1449232593.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-12-04_1449232640.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-12-04_1449232663.jpg" imageonload="imageLoaded()">
-                    <img src="assets/frames/2015-12-04_1449232717.jpg" imageonload="imageLoaded()">
+            <div ng-class="{'invisible': !gif}">
+                <div id="gif-holder" class="move" ng-click="toggleMusic()">
+                    <svg
+                       ng-show="sound.paused"
+                       class="pauseIcon"
+                       xmlns:dc="http://purl.org/dc/elements/1.1/"
+                       xmlns:cc="http://creativecommons.org/ns#"
+                       xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                       xmlns:svg="http://www.w3.org/2000/svg"
+                       xmlns="http://www.w3.org/2000/svg"
+                       id="pause-icon"
+                       version="1.1"
+                       height="150"
+                       width="150"
+                       viewBox="0 0 1200 1200">
+                      <path
+                         id="path15778"
+                         d="M 600,0 C 268.62914,0 0,268.62914 0,600 c 0,331.37086 268.62914,600 600,600 331.37086,0 600,-268.62914 600,-600 C 1200,268.62914 931.37086,0 600,0 z m -269.16515,289.38 181.71397,0 0,621.24 -181.71397,0 0,-621.24 z m 356.61633,0 181.71399,0 0,621.24 -181.71399,0 0,-621.24 z" />
+                    </svg>
+                    <div class="gif-holder__slider" ng-class="{'stopped': sound.paused, 'switcher': switcher}">
+                        <img src="assets/frames/2015-02-17_1424200664.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-17_1424200754.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-17_1424200955.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-17_1424201040.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-17_1424201121.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-17_1424201287.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-19_1424345339.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-21_1424523172.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-27_1425041443.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-27_1425066659.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-02-28_1425113738.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-01_1425210464.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-01_1425210682.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-02_1425303388.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-04_1425505593.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-04_1425505631.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-04_1425505653.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-04_1425505704.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-13_1426258097.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-21_1426967832.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-21_1426968073.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-31_1427834290.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-31_1427834387.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-03-31_1427834444.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-03_1428063391.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-03_1428064343.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429987865.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429987912.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429987938.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429988119.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429988143.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-04-25_1429988253.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-05-06_1430939454.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-05-14_1431600004.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-03_1433354781.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-04_1433429819.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-10_1433962335.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-19_1434740006.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-26_1435320390.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-26_1435320432.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-06-26_1435320460.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-07-09_1436445266.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-07-19_1437301595.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-07-19_1437301631.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-07-19_1437301710.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-07-19_1437301736.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-08-01_1438448845.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-08-16_1439728965.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-08-16_1439728992.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-09-13_1442150560.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-09-13_1442150605.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-09-13_1442150669.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-09-23_1442992579.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-08_1444331849.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-08_1444332152.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-16_1444998399.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-21_1445414167.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-21_1445414381.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-21_1445414389.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-21_1445414394.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-10-21_1445414484.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-11-19_1447928946.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-11-23_1448291694.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-11-23_1448291773.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-12-04_1449232593.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-12-04_1449232640.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-12-04_1449232663.jpg" imageonload="imageLoaded()">
+                        <img src="assets/frames/2015-12-04_1449232717.jpg" imageonload="imageLoaded()">
+                    </div>
                 </div>
-                <!-- <x-gif id="x-gif" src="assets/21-pagepro-2015.gif" speed="{{switcher}}"></x-gif> -->
+                <div class="logos">
+                    <img src="assets/pagepro_logo_white.svg" alt="Pagepro" class="logo--pagepro">
+                    <img src="assets/102-angular-js-logo.png" align="Angular JS" class="logo--angular">
+                </div>
             </div>
         </div>
     </body>

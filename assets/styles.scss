@@ -28,6 +28,9 @@
     url('proximanova-semibold-webfont.ttf') format('truetype'),
     url('proximanova-semibold-webfont.svg') format('svg');
 }
+* {
+    box-sizing: border-box;
+}
 body {
     margin: 0;
     font-family: 'ProximaNova', Arial;
@@ -46,6 +49,9 @@ body {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-flex-flow: row wrap;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
     height: 100vh;
     width: 100%;
     -webkit-box-pack: center;
@@ -104,7 +110,7 @@ img {
 
 @keyframes move {
     @for $i from 1 through 68 {
-        #{floor($i/68 * 100%)} {
+        #{($i/68 * 100%)} {
             top: -640px * ($i - 1);
         }
     }
@@ -112,7 +118,7 @@ img {
 
 @-webkit-keyframes move {
     @for $i from 1 through 68 {
-        #{floor($i/68 * 100%)} {
+        #{($i/68 * 100%)} {
             top: -640px * ($i - 1);
         }
     }
@@ -128,10 +134,17 @@ img {
     }
     .gif-holder__slider {
         position: relative;
-        animation: move 20s infinite;
+        animation: move 82s infinite;
+        -webkit-animation: move 82s infinite;
         animation-timing-function: step-start;
+        -webkit-animation-timing-function: step-start;
+        &.switcher {
+            animation-duration: 41s;
+            -webkit-animation-duration: 41s;
+        }
         &.stopped {
             animation-duration: 0s;
+            -webkit-animation-duration: 0s;
             opacity: 0.5;
         }
     }
@@ -150,10 +163,10 @@ img {
 
 .images-loader--bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: -16px;
+    left: -16px;
+    right: -16px;
+    bottom: -16px;
     z-index: 20;
     -webkit-filter: blur(16px);
     -moz-filter: blur(16px);
@@ -161,8 +174,6 @@ img {
     -ms-filter: blur(16px);
     filter: blur(16px);
     background: url(bg_hero-02.jpg);
-    background-size: cover;
-    background-attachment: fixed;
     background-position: center center;
 }
 .images-loader--bar {
@@ -173,17 +184,82 @@ img {
     height: 100%;
     z-index: 21;
     .progressbar {
-        width: 100%;
-        height: 5px;
-        margin: 50px auto;
+        position: absolute;
+        top: 0;
+        left: 20px;
+        right: 20px;
+        bottom: 0;
+        margin: auto;
+        height: 6px;
         background: #000;
+        border-radius: 3px;
         .bar {
             width: 100%;
-            height: 1px;
-            margin: 2px 0;
-            background: #d4213d;
+            height: 2px;
+            margin: 2px 2px;
+            background: #BFBBBB;
             position: absolute;
-            box-shadow: 0px 0px 10px 1px rgba(212, 72, 94, 0.7);
         }
+    }
+}
+
+.logos {
+    position: absolute;
+    width: 640px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+            justify-content: center;
+    img {
+        float: left;
+    }
+    .logo--pagepro {
+        width: 184px;
+        height: 102px;
+    }
+    .logo--angular {
+        width: 90px;
+        height: 90px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 786px) {
+    @keyframes move-alt {
+        @for $i from 1 through 68 {
+            #{($i/68 * 100%)} {
+                top: -320px * ($i - 1);
+            }
+        }
+    }
+
+    @-webkit-keyframes move-alt {
+        @for $i from 1 through 68 {
+            #{($i/68 * 100%)} {
+                top: -320px * ($i - 1);
+            }
+        }
+    }
+    .before-frame,
+    .show-frame {
+        font-size: 26px;
+    }
+    .before-frame {
+        padding: 0 10px;
+    }
+    #gif-holder {
+        width: 320px;
+        height: 320px;
+        .gif-holder__slider {
+            animation-name: move-alt;
+            -webkit-animation-name: move-alt;
+        }
+    }
+    .logos {
+        width: 320px;
     }
 }
