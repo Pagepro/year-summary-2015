@@ -16,9 +16,9 @@
         <div ng-show="loadingInProgress" class="images-loader--bg"></div>
         <div ng-show="loadingInProgress" class="images-loader--bar">
             <div class="progressbar">
-                <div class="bar" style="width: {{imagesLoaded/68 * 100 | number:0}}%"></div>
+                <div class="bar" style="width: calc({{imagesLoaded/68 * 100 | number:0}}% - 4px)"></div>
             </div>
-            <div ng-if="audioLoadingInProgress && imagesLoaded == 68">Audio is still loading...</div>
+            <div class="audio-loader" ng-if="audioLoadingInProgress && imagesLoaded == 68">Audio is still loading...</div>
         </div>
         <div class="before-frame" ng-show="sound.paused && !firstPlay && !loadingInProgress">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>

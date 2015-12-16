@@ -111,19 +111,27 @@ img {
     left: -9999px;
 }
 
-@keyframes move1 {
-    @for $i from 1 through $numOfSlides {
-        #{($i/$numOfSlides * 100%)} {
-            top: -640px * ($i - 1);
-        }
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
-@-webkit-keyframes move1 {
-    @for $i from 1 through $numOfSlides {
-        #{($i/$numOfSlides * 100%)} {
-            top: -640px * ($i - 1);
-        }
+@-webkit-keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
@@ -150,22 +158,9 @@ img {
     width: 640px;
     height: 640px;
     overflow: hidden;
-    [class*="slide-"] {
-        opacity: 1;
-    }
     .gif-holder__slider {
         position: relative;
-        animation: move 82s infinite;
-        -webkit-animation: move 82s infinite;
-        animation-timing-function: step-start;
-        -webkit-animation-timing-function: step-start;
-        &.switcher {
-            animation-duration: 41s;
-            -webkit-animation-duration: 41s;
-        }
         &.stopped {
-            animation-duration: 0s;
-            -webkit-animation-duration: 0s;
             opacity: 0.5;
         }
     }
@@ -224,6 +219,20 @@ img {
     }
 }
 
+.audio-loader {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    animation: flash 3s infinite;
+    -webkit-animation: flash 3s infinite;
+}
+
 .logos {
     position: absolute;
     width: 640px;
@@ -250,21 +259,6 @@ img {
 }
 
 @media (max-width: 786px) {
-    @keyframes move-alt1 {
-        @for $i from 1 through $numOfSlides {
-            #{($i/$numOfSlides * 100%)} {
-                top: -320px * ($i - 1);
-            }
-        }
-    }
-
-    @-webkit-keyframes move-alt1 {
-        @for $i from 1 through $numOfSlides {
-            #{($i/$numOfSlides * 100%)} {
-                top: -320px * ($i - 1);
-            }
-        }
-    }
     .before-frame,
     .show-frame {
         font-size: 26px;
@@ -275,10 +269,6 @@ img {
     #gif-holder {
         width: 320px;
         height: 320px;
-        .gif-holder__slider {
-            animation-name: move-alt;
-            -webkit-animation-name: move-alt;
-        }
     }
     .logos {
         width: 320px;

@@ -47,6 +47,7 @@ app.controller('AnimationCtrl', [
                 $scope.$watch('sound.audio.readyState', function () {
                     if ($scope.sound.audio.readyState === 4) {
                         $scope.audioLoadingInProgress = false;
+                        $scope.checkLoading();
                     }
                 });
             }
@@ -54,6 +55,10 @@ app.controller('AnimationCtrl', [
 
         $scope.imageLoaded = function () {
             $scope.imagesLoaded++;
+            $scope.checkLoading();
+        }
+
+        $scope.checkLoading = function () {
             if ($scope.imagesLoaded == 68 && !$scope.audioLoadingInProgress) {
                 $scope.loadingInProgress = false;
             }
