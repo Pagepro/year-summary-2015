@@ -31,6 +31,9 @@
 * {
     box-sizing: border-box;
 }
+
+$numOfSlides: 68;
+
 body {
     margin: 0;
     font-family: 'ProximaNova', Arial;
@@ -108,21 +111,39 @@ img {
     left: -9999px;
 }
 
-@keyframes move {
-    @for $i from 1 through 68 {
-        #{($i/68 * 100%)} {
+@keyframes move1 {
+    @for $i from 1 through $numOfSlides {
+        #{($i/$numOfSlides * 100%)} {
             top: -640px * ($i - 1);
         }
     }
 }
 
-@-webkit-keyframes move {
-    @for $i from 1 through 68 {
-        #{($i/68 * 100%)} {
+@-webkit-keyframes move1 {
+    @for $i from 1 through $numOfSlides {
+        #{($i/$numOfSlides * 100%)} {
             top: -640px * ($i - 1);
         }
     }
 }
+
+.gif-holder__slider {
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+    }
+}
+
+@for $i from 1 through $numOfSlides {
+    .gif-holder__slider[data-frame="#{$i}"] {
+        img:nth-child(#{$i}) {
+            opacity: 1;
+        }
+    }
+}
+
 
 #gif-holder {
     position: relative;
@@ -229,17 +250,17 @@ img {
 }
 
 @media (max-width: 786px) {
-    @keyframes move-alt {
-        @for $i from 1 through 68 {
-            #{($i/68 * 100%)} {
+    @keyframes move-alt1 {
+        @for $i from 1 through $numOfSlides {
+            #{($i/$numOfSlides * 100%)} {
                 top: -320px * ($i - 1);
             }
         }
     }
 
-    @-webkit-keyframes move-alt {
-        @for $i from 1 through 68 {
-            #{($i/68 * 100%)} {
+    @-webkit-keyframes move-alt1 {
+        @for $i from 1 through $numOfSlides {
+            #{($i/$numOfSlides * 100%)} {
                 top: -320px * ($i - 1);
             }
         }

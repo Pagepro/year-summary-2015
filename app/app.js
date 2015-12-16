@@ -8,39 +8,54 @@ app.controller('AnimationCtrl', [
     '$window',
     'ngAudio',
     function ($scope, $interval, $timeout, $window, ngAudio) {
-        var switcherCouner = 0;
+        var counter = -3; // fixed to music tempo
+        var switchingInterval;
+        $scope.switcherCouner = 1;
         $scope.sound = ngAudio.load("assets/deaf_kev_-_invincible.mp3");
-        console.log($scope.sound);
         $scope.logo = false;
         $scope.description = false;
         $scope.gif = false;
-        $scope.switcher = false;
         $scope.firstPlay = false;
         $scope.imagesLoaded = 0;
-        $scope.imagesLoadingInProgress = true;
+        $scope.loadingInProgress = true;
+        $scope.audioLoadingInProgress = true;
 
         $scope.play = function() {
             $scope.sound.play();
             $scope.logo = true;
-            $interval(function () {
-                switcherCouner++;
-                if (switcherCouner % 2 === 0) {
-                    $scope.switcher = false;
-                } else {
-                    $scope.switcher = true;
-                }
-            }, 600);
+            if (!switchingInterval) {
+                switchingInterval = $interval(function () {
+                    counter++;
+                    if (counter % 4 !== 0) {
+                        $scope.switcherCouner++;
+                    }
+                    if ($scope.switcherCouner > 68) {
+                        $scope.switcherCouner = 1;
+                    }
+                }, 300);
+            }
         };
 
         $scope.$watch('sound.currentTime', function () {
-            if ($scope.sound.currentTime > 10700)
-            $scope.firstPlay = true;
-        })
+            if ($scope.sound.currentTime > 10.7) {
+                $scope.firstPlay = true;
+            }
+        });
+
+        $scope.$watch('sound.audio', function () {
+            if ($scope.sound.audio) {
+                $scope.$watch('sound.audio.readyState', function () {
+                    if ($scope.sound.audio.readyState === 4) {
+                        $scope.audioLoadingInProgress = false;
+                    }
+                });
+            }
+        });
 
         $scope.imageLoaded = function () {
             $scope.imagesLoaded++;
-            if ($scope.imagesLoaded == 68) {
-                $scope.imagesLoadingInProgress = false;
+            if ($scope.imagesLoaded == 68 && !$scope.audioLoadingInProgress) {
+                $scope.loadingInProgress = false;
             }
         }
 
@@ -54,6 +69,8 @@ app.controller('AnimationCtrl', [
 
         $scope.stop = function() {
             $scope.sound.pause();
+            $interval.cancel(switchingInterval);
+            switchingInterval = undefined;
         };
     }])
 
