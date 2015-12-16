@@ -42,6 +42,7 @@ body {
     background-attachment: fixed;
     background-position: center center;
     color: white;
+    min-height: 100vh;
 }
 [ng-click] {
     cursor: pointer;
