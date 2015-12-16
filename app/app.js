@@ -17,8 +17,14 @@ app.controller('AnimationCtrl', [
         $scope.gif = false;
         $scope.firstPlay = false;
         $scope.imagesLoaded = 0;
+        $scope.framesCount = 0;
         $scope.loadingInProgress = true;
         $scope.audioLoadingInProgress = true;
+
+        var imgs = document.getElementsByTagName('img');
+        for (var i = 0; i < imgs.length; i++) {
+            console.log(imgs[i].className);
+        }
 
         $scope.play = function() {
             $scope.sound.play();
@@ -29,7 +35,7 @@ app.controller('AnimationCtrl', [
                     if (counter % 4 !== 0) {
                         $scope.switcherCouner++;
                     }
-                    if ($scope.switcherCouner > 68) {
+                    if ($scope.switcherCouner > $scope.framesCount) {
                         $scope.switcherCouner = 1;
                     }
                 }, 300);
@@ -59,7 +65,7 @@ app.controller('AnimationCtrl', [
         }
 
         $scope.checkLoading = function () {
-            if ($scope.imagesLoaded == 68 && !$scope.audioLoadingInProgress) {
+            if ($scope.imagesLoaded == $scope.framesCount && !$scope.audioLoadingInProgress) {
                 $scope.loadingInProgress = false;
             }
         }
@@ -72,11 +78,22 @@ app.controller('AnimationCtrl', [
             }
         };
 
-        $scope.stop = function() {
+        $scope.stop = function () {
             $scope.sound.pause();
             $interval.cancel(switchingInterval);
             switchingInterval = undefined;
         };
+
+        $scope.setNumberOfFrames = function () {
+            var imgs = document.getElementsByTagName('img');
+            for (var i = 0; i < imgs.length; i++) {
+                if (imgs[i].className === "frame") {
+                    $scope.framesCount++;
+                }
+            }
+        }
+
+        $scope.setNumberOfFrames();
     }])
 
 app.directive('imageonload', function() {
