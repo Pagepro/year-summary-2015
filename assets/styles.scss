@@ -42,7 +42,9 @@ body {
     background-attachment: fixed;
     background-position: center center;
     color: white;
-    min-height: 100vh;
+    // min-height: 100vh;
+    overflow: hidden;
+    // height: 100%;
 }
 [ng-click] {
     cursor: pointer;
@@ -253,9 +255,9 @@ img {
         height: 102px;
     }
     .logo--angular {
-        width: 90px;
-        height: 90px;
-        margin-top: 10px;
+        width: 50px;
+        height: 50px;
+        margin-top: 26px;
     }
 }
 

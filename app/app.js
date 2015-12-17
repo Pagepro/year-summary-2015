@@ -10,29 +10,29 @@ app.controller('AnimationCtrl', [
     function ($scope, $interval, $timeout, $window, ngAudio) {
         var counter = -3; // fixed to music tempo
         var switchingInterval;
-        $scope.switcherCouner = 1;
+        $scope.switcherCouner = 0;
         $scope.sound = ngAudio.load("assets/deaf_kev_-_invincible.mp3");
-        $scope.logo = false;
-        $scope.description = false;
-        $scope.gif = false;
+        $scope.sound.audio = $scope.sound.audio || new Audio();
         $scope.firstPlay = false;
         $scope.imagesLoaded = 0;
         $scope.framesCount = 0;
         $scope.loadingInProgress = true;
         $scope.audioLoadingInProgress = true;
 
-        var imgs = document.getElementsByTagName('img');
-        for (var i = 0; i < imgs.length; i++) {
-            console.log(imgs[i].className);
-        }
+        $timeout(function () { // re init loading audio file, because iOS Safari sometimes have problems with loading
+            if (!$scope.sound.audio.readyState) {
+                console.debug('reinit ngAudio...');
+                $scope.sound = ngAudio.load("assets/deaf_kev_-_invincible.mp3");
+                $scope.sound.audio = $scope.sound.audio || new Audio();
+            }
+        }, 3000);
 
         $scope.play = function() {
             $scope.sound.play();
-            $scope.logo = true;
             if (!switchingInterval) {
-                switchingInterval = $interval(function () {
+                switchingInterval = $interval(function () { // switch frame every 600ms (should be related to music tempo)
                     counter++;
-                    if (counter % 4 !== 0) {
+                    if (counter % 4 !== 0) { // don't switch frame every 4 beats (interval repeats)
                         $scope.switcherCouner++;
                     }
                     if ($scope.switcherCouner > $scope.framesCount) {
@@ -43,19 +43,15 @@ app.controller('AnimationCtrl', [
         };
 
         $scope.$watch('sound.currentTime', function () {
-            if ($scope.sound.currentTime > 10.7) {
+            if ($scope.sound.currentTime > 10.7) { // set to true when slides showed for first time. It is in watch function, because slow connections have problems with audio and times can be different
                 $scope.firstPlay = true;
             }
         });
 
-        $scope.$watch('sound.audio', function () {
-            if ($scope.sound.audio) {
-                $scope.$watch('sound.audio.readyState', function () {
-                    if ($scope.sound.audio.readyState === 4) {
-                        $scope.audioLoadingInProgress = false;
-                        $scope.checkLoading();
-                    }
-                });
+        $scope.$watch('sound.audio.readyState', function () { // watch progress of audio loading. 4 means finished.
+            if ($scope.sound.audio.readyState > 0) {
+                $scope.audioLoadingInProgress = false;
+                $scope.checkLoading();
             }
         });
 

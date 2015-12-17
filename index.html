@@ -18,7 +18,7 @@
             <div class="progressbar">
                 <div class="bar" style="width: calc({{imagesLoaded/68 * 100 | number:0}}% - 4px)"></div>
             </div>
-            <div class="audio-loader" ng-if="audioLoadingInProgress && imagesLoaded == 68">Audio is still loading...</div>
+            <div class="audio-loader" ng-if="audioLoadingInProgress && imagesLoaded === framesCount">Audio is still loading...</div>
         </div>
         <div class="before-frame" ng-show="sound.paused && !firstPlay && !loadingInProgress">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="logos">
                     <img src="assets/pagepro_logo_white.svg" alt="Pagepro" class="logo--pagepro">
-                    <img src="assets/102-angular-js-logo.png" align="Angular JS" class="logo--angular">
+                    <img src="assets/102-angular-js-logo.png" alt="Angular JS" class="logo--angular">
                 </div>
             </div>
         </div>
