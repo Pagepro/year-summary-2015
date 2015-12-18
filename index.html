@@ -22,8 +22,8 @@
             </div>
             <div class="audio-loader" ng-if="audioLoadingInProgress && imagesLoaded === framesCount">Audio is still loading...</div>
         </div>
-        <div class="fork-button" ng-hide="loadingInProgress">
-            <a class="github-button" href="https://github.com/Pagepro/year-summary-2015/fork" data-icon="octicon-repo-forked" data-style="mega" aria-label="Fork Pagepro/year-summary-2015 on GitHub">Fork</a>
+        <div class="fork-button github_badge" ng-hide="loadingInProgress">
+            <a class="github-button" target="_blank" href="https://github.com/Pagepro/year-summary-2015/fork">Fork me on Github!</a>
         </div>
         <div class="before-frame" ng-show="sound.paused && !firstPlay && !loadingInProgress">
             <a ng-click="play()" class="play">Turn on speakers and click!</a>
@@ -131,7 +131,5 @@
                 </div>
             </div>
         </div>
-        <!-- Place this tag right after the last button or just before your close body tag. -->
-        <!-- <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script> -->
     </body>
 </html>

@@ -82,10 +82,6 @@ app.controller('AnimationCtrl', [
 
         $scope.init = function () {
             var imgs = document.getElementsByTagName('img');
-            var my_script = document.createElement('script');
-            my_script.setAttribute('src','https://buttons.github.io/buttons.js');
-            my_script.setAttribute('id','github-bjs');
-            document.body.appendChild(my_script);
             for (var i = 0; i < imgs.length; i++) {
                 if (imgs[i].className === "frame") {
                     $scope.framesCount++;
